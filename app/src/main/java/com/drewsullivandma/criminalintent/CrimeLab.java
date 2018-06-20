@@ -31,12 +31,7 @@ public class CrimeLab {
         return mCrimes;
     }
 
-    public Crime getCrime(UUID id) {
-        for (Crime crime : mCrimes) {
-            if (crime.getId().equals(id)) {
-                return crime;
-            }
-        }
-        return null;
+    public Crime getCrime(int index) {
+        return mCrimes.get(index);
     }
 }

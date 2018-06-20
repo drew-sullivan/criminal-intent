@@ -6,13 +6,11 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -72,9 +70,8 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            Intent intent = CrimeActivity.newIntent(getActivity(), mCrime.getId());
-            int index = mCrimeRecyclerView.getChildAdapterPosition(view);
-            mostRecentlyModifiedIndex = index;
+            mostRecentlyModifiedIndex = mCrimeRecyclerView.getChildAdapterPosition(view);
+            Intent intent = CrimeActivity.newIntent(getActivity(), mostRecentlyModifiedIndex);
             startActivity(intent);
         }
     }
