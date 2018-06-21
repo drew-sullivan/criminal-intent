@@ -71,7 +71,7 @@ public class CrimeListFragment extends Fragment {
         @Override
         public void onClick(View view) {
             mostRecentlyModifiedIndex = mCrimeRecyclerView.getChildAdapterPosition(view);
-            Intent intent = CrimeActivity.newIntent(getActivity(), mostRecentlyModifiedIndex);
+            Intent intent = CrimePagerActivity.newIntent(getActivity(), mostRecentlyModifiedIndex);
             startActivity(intent);
         }
     }
