@@ -138,7 +138,7 @@ public class CrimeFragment extends Fragment {
 
     private void updateTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
-        String time = sdf.format(mCrime.getDate());
+        String time = sdf.format(mCrime.getTime());
         mTimeButton.setText(time);
     }
 }
