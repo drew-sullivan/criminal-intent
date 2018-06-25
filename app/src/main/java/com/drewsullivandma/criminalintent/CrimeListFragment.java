@@ -61,7 +61,7 @@ public class CrimeListFragment extends Fragment {
             mCrime = crime;
             mTitleTextView.setText(mCrime.getTitle());
 
-            SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMM d, Y");
+            SimpleDateFormat sdf = new SimpleDateFormat("h:m a, EEEE, MMM d, Y");
             String date = sdf.format(mCrime.getDate());
             mDateTextView.setText(date);
 
