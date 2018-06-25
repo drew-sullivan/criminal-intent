@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import java.util.List;
+import java.util.UUID;
 
 public class CrimePagerActivity extends AppCompatActivity {
 
@@ -17,9 +18,9 @@ public class CrimePagerActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private List<Crime> mCrimes;
 
-    public static Intent newIntent(Context packageContext, int crimeIndex) {
+    public static Intent newIntent(Context packageContext, int crimePosition) {
         Intent intent = new Intent(packageContext, CrimePagerActivity.class);
-        intent.putExtra(EXTRA_CRIME_ID, crimeIndex);
+        intent.putExtra(EXTRA_CRIME_ID, crimePosition);
         return intent;
     }
 
