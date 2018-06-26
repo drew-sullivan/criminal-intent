@@ -30,7 +30,6 @@ public class CrimeListFragment extends Fragment {
     private RecyclerView mCrimeRecyclerView;
     private TextView mEmptyListTextView;
     private CrimeAdapter mAdapter;
-    private int mostRecentlyModifiedIndex;
     private boolean mSubtitleVisible;
 
     @Override
@@ -70,7 +69,7 @@ public class CrimeListFragment extends Fragment {
             mAdapter = new CrimeAdapter(crimes);
             mCrimeRecyclerView.setAdapter(mAdapter);
         } else {
-            mAdapter.notifyItemChanged(mostRecentlyModifiedIndex);
+            mAdapter.notifyDataSetChanged();
         }
         updateSubtitle();
     }
@@ -106,8 +105,7 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            mostRecentlyModifiedIndex = mCrimeRecyclerView.getChildAdapterPosition(view);
-            Intent intent = CrimePagerActivity.newIntent(getActivity(), mostRecentlyModifiedIndex);
+            Intent intent = CrimePagerActivity.newIntent(getActivity(), mCrime.getId());
             startActivity(intent);
         }
     }
@@ -160,13 +158,10 @@ public class CrimeListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.new_crime:
-                mEmptyListTextView.setVisibility(View.GONE);
-                mCrimeRecyclerView.setVisibility(View.VISIBLE);
                 Crime crime = new Crime();
                 CrimeLab.get(getActivity()).addCrime(crime);
-                int latestIndex = CrimeLab.get(getActivity()).getCrimes().size() - 1;
                 Intent intent = CrimePagerActivity
-                        .newIntent(getActivity(), latestIndex);
+                        .newIntent(getActivity(), crime.getId());
                 startActivity(intent);
                 return true;
             case R.id.show_subtitle:

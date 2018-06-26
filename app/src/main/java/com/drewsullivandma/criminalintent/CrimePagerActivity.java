@@ -18,9 +18,9 @@ public class CrimePagerActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private List<Crime> mCrimes;
 
-    public static Intent newIntent(Context packageContext, int crimePosition) {
+    public static Intent newIntent(Context packageContext, UUID crimeId) {
         Intent intent = new Intent(packageContext, CrimePagerActivity.class);
-        intent.putExtra(EXTRA_CRIME_ID, crimePosition);
+        intent.putExtra(EXTRA_CRIME_ID, crimeId);
         return intent;
     }
 
@@ -38,7 +38,8 @@ public class CrimePagerActivity extends AppCompatActivity {
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fm) {
             @Override
             public Fragment getItem(int position) {
-                return CrimeFragment.newInstance(position);
+                Crime crime = mCrimes.get(position);
+                return CrimeFragment.newInstance(crime.getId());
             }
 
             @Override
