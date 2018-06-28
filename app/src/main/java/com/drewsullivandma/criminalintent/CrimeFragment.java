@@ -58,7 +58,6 @@ public class CrimeFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-
         CrimeLab.get(getActivity()).updateCrime(mCrime);
     }
 
@@ -99,19 +98,6 @@ public class CrimeFragment extends Fragment {
             }
         });
 
-        mTimeButton = (Button) v.findViewById(R.id.crime_time);
-        updateTime();
-        mTimeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fm = getFragmentManager();
-                TimePickerFragment dialog = TimePickerFragment
-                        .newInstance(mCrime.getTime());
-                dialog.setTargetFragment(CrimeFragment.this, REQUEST_TIME);
-                dialog.show(fm, DIALOG_TIME);
-            }
-        });
-
         mSolvedCheckBox = (CheckBox) v.findViewById(R.id.crime_solved);
         mSolvedCheckBox.setChecked(mCrime.isSolved());
         mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -134,11 +120,6 @@ public class CrimeFragment extends Fragment {
                     .getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mCrime.setDate(date);
             updateDate();
-        } else if (requestCode == REQUEST_TIME) {
-            Date time = (Date) data
-                    .getSerializableExtra(TimePickerFragment.EXTRA_TIME);
-            mCrime.setTime(time);
-            updateTime();
         }
     }
 
@@ -146,11 +127,5 @@ public class CrimeFragment extends Fragment {
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE, MMMM d, Y");
         String date = sdf.format(mCrime.getDate());
         mDateButton.setText(date);
-    }
-
-    private void updateTime() {
-        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
-        String time = sdf.format(mCrime.getTime());
-        mTimeButton.setText(time);
     }
 }

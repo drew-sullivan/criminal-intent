@@ -1,6 +1,5 @@
 package com.drewsullivandma.criminalintent;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -8,11 +7,10 @@ public class Crime {
     private UUID mId;
     private String mTitle;
     private Date mDate;
-    private Date mTime;
     private boolean mSolved;
 
     public Crime() {
-        mId = UUID.randomUUID();
+        this(UUID.randomUUID());
     }
 
     public Crime(UUID id) {
@@ -46,13 +44,5 @@ public class Crime {
 
     public void setSolved(boolean solved) {
         mSolved = solved;
-    }
-
-    public Date getTime() {
-        return mTime;
-    }
-
-    public void setTime(Date time) {
-        mTime = time;
     }
 }

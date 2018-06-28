@@ -57,18 +57,11 @@ public class CrimeListFragment extends Fragment {
         CrimeLab crimeLab = CrimeLab.get(getActivity());
         List<Crime> crimes = crimeLab.getCrimes();
 
-        if (crimes.size() == 0) {
-            mEmptyListTextView.setVisibility(View.VISIBLE);
-            mCrimeRecyclerView.setVisibility(View.GONE);
-        } else {
-            mEmptyListTextView.setVisibility(View.GONE);
-            mCrimeRecyclerView.setVisibility(View.VISIBLE);
-        }
-
         if (mAdapter == null) {
             mAdapter = new CrimeAdapter(crimes);
             mCrimeRecyclerView.setAdapter(mAdapter);
         } else {
+            mAdapter.setCrimes(crimes);
             mAdapter.notifyDataSetChanged();
         }
         updateSubtitle();
@@ -95,10 +88,7 @@ public class CrimeListFragment extends Fragment {
 
             SimpleDateFormat sdfDate = new SimpleDateFormat("EEEE, MMM d, Y");
             String date = sdfDate.format(mCrime.getDate());
-
-            SimpleDateFormat sdfTime = new SimpleDateFormat("h:mm a");
-            String time = sdfTime.format(mCrime.getTime());
-            mDateTextView.setText(combineDateAndTime(date, time));
+            mDateTextView.setText(date);
 
             mSolvedImageView.setVisibility(crime.isSolved() ? View.VISIBLE : View.GONE);
         }
@@ -133,6 +123,10 @@ public class CrimeListFragment extends Fragment {
         @Override
         public int getItemCount() {
             return mCrimes.size();
+        }
+
+        public void setCrimes(List<Crime> crimes) {
+            mCrimes = crimes;
         }
     }
 
