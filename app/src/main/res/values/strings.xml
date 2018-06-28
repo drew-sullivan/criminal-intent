@@ -14,5 +14,4 @@
         <item quantity="other">%1$d Crimes</item>
     </plurals>
     <string name="delete_crime">Delete Crime</string>
-    <string name="empty_list">There are no crimes... yet!</string>
 </resources>
